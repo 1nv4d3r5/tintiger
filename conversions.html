@@ -1,0 +1,163 @@
+<?php
+// page of measurement conversion stuff.
+// Much stolen from source code of URL: http://www.worldwidemetric.com/metcal.htm
+
+// mm, cm, inch, feet, yard, meter
+// mile, kilometer, nautical mile @ lat
+// mph, kph, knots
+// compass recipricals
+// pressure: bar, HPa, PSI, 
+?>
+<html>
+<head>
+    <title>Measurement conversions</title>
+    <script>
+function convertform(form){
+    var firstvalue = 0;
+    for (var i = 1; i <= form.count; i++) {
+       // Find first non-blank entry
+       if (form.elements[i].value != null && form.elements[i].value.length != 0) {
+          if (i == 1 && form.elements[2].value != '') return false;
+          firstvalue = form.elements[i].value / form.elements[i].factor;
+          break;
+       }
+    }
+    if (firstvalue == 0) {
+       clearform(form);
+       return false;
+    }
+    for (var i = 1; i <= form.count; i++)
+       form.elements[i].value = formatvalue((firstvalue * form.elements[i].factor), form.rsize);
+    return true;
+}    
+
+function convertTempform(form) {
+  if (form.elements[1].value != null && form.elements[1].value.length != 0) {
+		firstvalue = form.elements[1].value;
+		form.elements[2].value = formatvalue((1.8 * firstvalue) + 32, form.rsize);
+		return
+	}
+	if (form.elements[2].value != null && form.elements[2].value.length != 0) {
+		firstvalue = form.elements[2].value;
+		form.elements[1].value = formatvalue(( firstvalue - 32) / 1.8, form.rsize);
+		return
+	}
+}
+
+function formatvalue(input, rsize) {
+    var invalid = '**************************';
+    var nines   = '999999999999999999999999';
+    var strin   = '' + input;
+    var fltin   = parseFloat(strin);
+    if (strin.length <= rsize) return strin;
+    if ((strin.indexOf('e') != -1) || (fltin > parseFloat(nines.substring(0,rsize)+'.4'))) {
+        return invalid.substring(0, rsize);
+    }
+    var rounded = '' + (fltin + (fltin - parseFloat(strin.substring(0, rsize))));
+    return rounded.substring(0, rsize);
+}
+
+function clearform(form) {
+    for (var i = 1; i <= form.count; i++) { form[i].value = ''; }
+    return true;
+}
+</script>
+<script language='javascript'>
+document.forms[0].count = 8;
+document.forms[0].rsize = 10; 
+document.forms[0].valMM.factor    = 100;            // mm to mm.
+document.forms[0].valCM.factor    = 10;             // mm to cm.
+document.forms[0].valMiles.factor = 0.0000621371;   // mm to miles.
+document.forms[0].valInch.factor  = 3.937007874;    // mm to in.
+document.forms[0].valMeter.factor = 0.1;            // mm to mtr.
+document.forms[0].valKM.factor    = 0.0001;         // mm to kilomtr.
+document.forms[0].valFeet.factor  = 0.3280839895;   // mm to feet.
+document.forms[0].valYard.factor  = 0.1093613298;   //mm to yards.
+
+document.forms[1].count = 6;
+document.forms[1].rsize = 7; 
+document.forms[1].valMTon.factor    = 0.001;        //KG To MTon;
+document.forms[1].valKG.factor      = 1;            //KG;
+document.forms[1].valLBS.factor     = 2.2046215;    //KG TO Pounds;
+document.forms[1].valOz.factor      = 35.27396;     //KG To Oz;
+document.forms[1].valGram.factor    = 1000;         //KG To Gram;
+document.forms[1].valTons.factor    = 0.0011023;    //KG To Tons;
+
+document.forms[2].count = 3;
+document.forms[2].rsize = 6; 
+document.forms[2].valBar.factor     = 0.980665;     //KgCm to Bar
+document.forms[2].valKgCm.factor    = 1;            //KgCm to KgCm
+document.forms[2].valPsi.factor     = 14.22;        //KgCm to Psi
+
+document.forms[3].count = 7;
+document.forms[3].rsize = 6; 
+document.forms[3].valML.factor      = 1000;         //Liters to ML;
+document.forms[3].valLiters.factor  = 1;            //Liters to Liters;
+document.forms[3].valFluid.factor   = 33.8239926;   //Liters to Fluid Ounces;
+document.forms[3].valPints.factor   = 2.11337;      //Liters to Pints; 
+document.forms[3].valCups.factor    = 4.22675;      //Liters to Cups; 
+document.forms[3].valQuarts.factor  = 1.056998;     //Liters to Quarts; 
+document.forms[3].valGallons.factor = 0.2642499;    //Liters to Gallons
+
+document.forms[4].count = 7;
+document.forms[4].rsize = 6; 
+document.forms[4].valML.factor      = 1000;         //Liters to ML;
+document.forms[4].valLiters.factor  = 1;            //Liters to Liters;
+document.forms[4].valFluid.factor   = 33.8239926;   //Liters to Fluid Ounces;
+document.forms[4].valPints.factor   = 2.11337;      //Liters to Pints; 
+document.forms[4].valCups.factor    = 4.22675;      //Liters to Cups; 
+document.forms[4].valQuarts.factor  = 1.056998;     //Liters to Quarts; 
+document.forms[4].valGallons.factor = 0.2642499;    //Liters to Gallons
+
+document.forms[5].count = 7;
+document.forms[5].rsize = 6; 
+document.forms[5].valML.factor      = 3785.4118;    //Gallons to ML;
+document.forms[5].valLiters.factor  = 3.7854118;    //Gallons to Liters;
+document.forms[5].valFluid.factor   = 128;          //Gallons to Fluid Ounces;
+document.forms[5].valPints.factor   = 8;            //Gallons to Pints; 
+document.forms[5].valCups.factor    = 16;           //Gallons to Cups; 
+document.forms[5].valQuarts.factor  = 4;            //Gallons to Quarts; 
+document.forms[5].valGallons.factor = 1;            //Gallons to Gallons
+</script>
+<div id='heading'>
+    <h1><strong>Conversion Calculators</strong></h1>
+<form method='POST'>
+<center>
+<table width='95%' border='0' cellpadding='7' cellspacing='1'>
+<tr> 
+  <td colspan='11'><h2 class='wwmsubtitle'>Weight Conversion Calculator</h2></td>
+</tr>
+<tr class=''> 
+  <td width='153'>Metric Tons</td>
+  <td width='153'>Kilograms</td>
+  <td width='112'>Pounds</td>
+  <td width='112'>Oz</td>
+  <td width='112'>Grams</td>
+  <td width='112'>Tons</td>
+  <td width='160'colspan='5'> 
+    <input name='button2' type='button' onclick='clearform(this.form)' value='Clear'></td>
+</tr>
+<tr class='cal'> 
+    <td><input type='text' name='valMTon' size='6' onFocus='clearform(this.form)'></td>
+    <td><input type='text' name='valKG'   size='6'></td>
+    <td><input type='text' name='valLBS'  size='6' onFocus='clearform(this.form)'></td>
+    <td><input type='text' name='valOz'   size='6' onFocus='clearform(this.form)'></td>
+    <td><input type='text' name='valGram' size='6' onFocus='clearform(this.form)'></td>
+    <td><input type='text' name='valTons' size='6' onFocus='clearform(this.form)'></td>
+    <td><input name='button2' type='button' onclick='convertform(this.form)' value='calculate'></td>
+</tr>
+</table>
+</center>
+</form>
+
+<br />
+<br />
+<p>I must thank the folks at <a href='http://www.worldwidemetric.com'>World Wide Metric</a>
+ for so much of this code. I swiped their stuff freely - there are so many things in this code that I'm learning from. Sure, a lot looks like theirs now but it is morphing into mine as I learn.
+ <ul>
+    <li>calculations - specific values that can be used in a single arithmatic sentence to convert. Only Temp needs an algorithm </li>
+    <li>HTML - So many < form >s on this page. and the lack of CSS. And...</li>
+    <li>CSS - there are class='' clauses but where's the def? I added my own look</li>
+    <li>jscript - lots of work w/ multiple forms, the Temp calcs, clearing, etc. Good lessons for a beginner</li>
+</ul>
+</p>
