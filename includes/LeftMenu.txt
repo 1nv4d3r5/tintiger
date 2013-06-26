@@ -1,0 +1,43 @@
+# Left Menu contents. 
+# # are comment lines. [] are set headers. 
+# link display is left of 1st equal sign \'=\', right side is  link contents 
+#   (which usually also contains an equal sign)
+# Spaces are accepted only in left side. Right side must be URL encoded (see [End])!
+# Once a section header is used, all elements to the next one are indented under it.
+#
+Journal=action=journal
+Guestbook=action=guestbook
+Contact Us=action=contact_us
+[Sparrow]
+Photo Gallery=action=photos
+Survey=page=Sparrow_survey
+Electrical Notes=page=Sparrow_electrical
+ToDo list=page=sparrow_todo
+Line Calcs=action=Sparrow_lines
+[Sailing]
+Articles=action=articles
+Food=page=Food
+Links Page=page=Sailing_links
+ABYC.E-11=pdf=ABYC.E-11
+Seamanship=link=http://www.sailnet.com/collections/seamanship/
+Victron Electrics book=link=http://www.victronenergy.com/upload/documents/Book-EN-EnergyUnlimited.pdf
+Windsong Sailing Schl=link=http://windsongsail.com
+XSRacing=link=http://xsracing.org/
+Sailing Anarchy=link=http://sailinganarchy.com
+[How Tos]
+Scull a Boat=action=articles&article=HowTo_Scull_a_Boat
+[Play]
+A Trillion Dollars=action=articles&article=a_trillion_dollars
+Internet Radio=page=InternetRadio
+Weather Stuff=action=articles&article=Weather
+Calculator=action=calculator
+Conversions=page=conversions
+[Bio]
+Resume=page=articles/resume
+Email Me=action=contact_us
+Login=action=login
+[Recovery]
+Principles=action=articles&article=PrinciplesOfRecovery
+If You Can...=action=articles&article=IfYouCan
+[]
+End=http://www.google.com/search?q=%27end+of+the+internet%27
